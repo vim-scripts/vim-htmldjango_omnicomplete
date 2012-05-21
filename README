@@ -4,7 +4,13 @@ Vim htmldjango autocomplete
 
 An omnicomplete tailored to django templates "tags/variables/filters/templates"
 
-Repo: git://github.com/mjbrownie/vim-htmldjango_omnicomplete.git
+Repo: http://github.com/mjbrownie/vim-htmldjango_omnicomplete
+
+Screenshots:
+
+    block: https://github.com/mjbrownie/vim-htmldjango_omnicomplete/raw/master/examples/block_eample.png
+    url: https://github.com/mjbrownie/vim-htmldjango_omnicomplete/raw/master/examples/url_example.png
+    extends: https://github.com/mjbrownie/vim-htmldjango_omnicomplete/blob/master/examples/extends_example.png
 
 Eg.
 
@@ -31,7 +37,12 @@ Eg.
 
         {% url <c-x><c-o> %} should complete views and named urls
 
-    6. optional variable name completion (placeholder)
+    6. super block complete
+
+        eg {% block c<c-x><c-o> %} to complete 'content' or something defined
+        in an extended template.
+
+    7. optional variable name completion (placeholder)
 
         {{ s<c-x><x-o> }}
 
@@ -88,38 +99,3 @@ TESTING
     should show the apps template dirs you need
 
     I've only tested this on a mac with vim 7.3 and django 1.4
-
-TODO
-
-    most of the line regexps still need tweaking. This might not work well with
-    an auto popup plugin like autocompletepop. Expect incorrect types to be set
-    as the context for edge cases.
-
-    -python fallback to naive lists.
-
-    Also RequestContext variables aren't seamlessly populated. It is possible
-    to populate a naive list yourself. In a future edition I might look at
-    plugging in python omnicomplete and grabbing Variables with some
-    middleware trickery. Ideas welcome.
-
-    some vim file to :so
-
-    python << EOF
-    htmldjango_opts['variable'] = [
-    {'word': 'myvariable', info:'my description'},
-    {'word': 'my_other_variable', info:'my description'},
-    ]
-    EOF
-
-    super block complete
-
-        eg {% block c<c-x><c-o> %} to complete 'content' or something defined
-        in an extended template.
-
-    Intelligent DOCTYPE handling
-        look for extends ... detect type in base html document etc
-
-    {% filter %} complete.
-
-        Special case  for filter. provide filters as first argument. Limit to
-        string filters

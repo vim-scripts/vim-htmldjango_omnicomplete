@@ -4,6 +4,12 @@ An omnicomplete tailored to django templates "tags/variables/filters/templates"
 
 Repo: git://github.com/mjbrownie/vim-htmldjango_omnicomplete.git
 
+Screenshots:
+
+    block: https://github.com/mjbrownie/vim-htmldjango_omnicomplete/raw/master/examples/block_eample.png
+    url: https://github.com/mjbrownie/vim-htmldjango_omnicomplete/raw/master/examples/url_example.png
+    extends: https://github.com/mjbrownie/vim-htmldjango_omnicomplete/blob/master/examples/extends_example.png
+
 Eg.
 
     1. Filters
@@ -29,7 +35,12 @@ Eg.
 
         {% url <c-x><c-o> %} should complete views and named urls
 
-    6. optional variable name completion (placeholder)
+    6. super block complete
+
+        eg {% block c<c-x><c-o> %} to complete 'content' or something defined
+        in an extended template.
+
+    7. optional variable name completion (placeholder)
 
         {{ s<c-x><x-o> }}
 
@@ -109,11 +120,6 @@ TODO
     ]
     EOF
 
-    super block complete
-
-        eg {% block c<c-x><c-o> %} to complete 'content' or something defined
-        in an extended template.
-
     Intelligent DOCTYPE handling
         look for extends ... detect type in base html document etc
 
@@ -121,3 +127,9 @@ TODO
 
         Special case  for filter. provide filters as first argument. Limit to
         string filters
+
+INTERNAL TODO
+
+    Refactor to cleanup namespace under a htmldjangocomplete class
+
+    remove load always plugin
