@@ -2,9 +2,10 @@ This is a mirror of http://www.vim.org/scripts/script.php?script_id=4027
 
 Vim htmldjango autocomplete
 
-An omnicomplete tailored to django templates "tags/variables/filters/templates"
+An omnicomplete tailored to django templates "tags/variables/filters/templates" I mainly find it useful for completing template and static directory paths. It will also fall back to regular html omnicomplete
 
-Repo: http://github.com/mjbrownie/vim-htmldjango_omnicomplete
+Repo: http://github.com/mjbrownie/vim-htmldjango_omnicomplete (star it for updates, feedback appreciated)
+
 
 Screenshots:
 
@@ -42,9 +43,17 @@ Eg.
         eg {% block c<c-x><c-o> %} to complete 'content' or something defined
         in an extended template.
 
-    7. optional variable name completion (placeholder)
 
+    7. static files complete
+
+        eg {% static "r<c-x><c-o>" %}
+
+        <script src="{% static "<c-x><c-o>" %}" /> - completes js files in static
+        <style src="{% static "<c-x><c-o>" %}" /> - completes css files in static
+        <img src="{% static "<c-x><c-o>" %}" /> - completes img files in static
         {{ s<c-x><x-o> }}
+
+    8. optional variable name completion (placeholder)
 
         will complete any maps defined in the python htmldjango_opts['variable']
         dict list. See below for info.
@@ -56,6 +65,12 @@ Eg.
 Requires:
 
     +python
+
+    I have this working on command line vim for linux and mac (I had to compile my own for osx with ./configure --enable-pythoninterp --with-features=huge). 
+
+    also I have DJANGO_SETTINGS_MODULE set in my vimrc. please look at my dotfiles if you are having trouble
+
+    https://github.com/mjbrownie/dotfiles/blob/master/_vimrc#L312-L340
 
 SETUP
 
