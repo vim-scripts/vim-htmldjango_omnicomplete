@@ -2,7 +2,7 @@
 " Language: htmldjango
 " Maintainer:   Michael Brown
 " Last Change:  Sun 13 May 2012 16:39:45 EST
-" Version: 0.9
+" Version: 0.9.2
 " Omnicomplete for django template taga/variables/filters
 " {{{1 Environment Settings
 if !exists('g:htmldjangocomplete_html_flavour')
@@ -159,6 +159,18 @@ warnings.filterwarnings('ignore',
     UserWarning,)
 
 import vim
+import os
+
+# Install the django-configurations importer (before Django setup).
+if os.environ.get('DJANGO_CONFIGURATION'):
+    import configurations.importer
+    configurations.importer.install()
+
+# Setup Django (required for >= 1.7).
+import django
+if hasattr(django, 'setup'):
+    django.setup()
+
 from django.template import get_library
 from django.template.loaders import filesystem, app_directories
 #Later versions of django seem to be fussy about get_library paths.
@@ -251,6 +263,7 @@ def get_template_names(pattern):
     dirs = mysettings.TEMPLATE_DIRS + app_template_dirs
     matches = []
     for d in dirs:
+        d = d + ('/' if not d.endswith('/') else '')
         for m in glob(os.path.join(d,pattern + '*')):
             if os.path.isdir(m):
                 for root,dirnames,filenames in os.walk(m):
@@ -258,13 +271,13 @@ def get_template_names(pattern):
                         fn,ext = os.path.splitext(f)
                         if ext in TEMPLATE_EXTS:
                             matches.append({
-                                'word' : os.path.join(root,f).replace(d + '/',''),
+                                'word' : os.path.join(root,f).replace(d,''),
                                 'info' : 'found in %s' % d
                             }
                             )
             else:
                 matches.append({
-                    'word' : m.replace(d + '/',''),
+                    'word' : m.replace(d,''),
                     'info' : 'found in %s' % d
                 }
                 )
